@@ -1,0 +1,55 @@
+---
+title: TopK Hybrid Search
+---
+
+## Code
+
+```python
+import os
+from typing import Optional
+
+import nltk  # type: ignore
+import typer
+from agno.agent import Agent
+from agno.knowledge.pdf_url import PDFUrlKnowledgeBase
+from rich.prompt import Prompt
+
+nltk.download("punkt")
+nltk.download("punkt_tab")
+
+knowledge_base = PDFUrlKnowledgeBase(
+    urls=["https://agno-public.s3.amazonaws.com/recipes/ThaiRecipes.pdf"],
+    vector_db=vector_db,
+)
+```
+
+## Usage
+
+<Steps>
+  <Snippet file="create-venv-step.mdx" />
+
+  <Step title="Set your API keys">
+    ```bash
+    export OPENAI_API_KEY=xxx
+    export TOPK_API_KEY=xxx
+    ```
+  </Step>
+
+  <Step title="Install libraries">
+    ```bash
+    pip install -U topk-sdk pypdf openai agno
+    ```
+  </Step>
+
+  <Step title="Run Agent">
+    <CodeGroup>
+    ```bash Mac
+    python cookbook/agent_concepts/hybrid_search/topk/agent.py
+    ```
+
+    ```bash Windows
+    python cookbook/agent_concepts/hybrid_search/topk/agent.py
+    ```
+    </CodeGroup>
+  </Step>
+</Steps>

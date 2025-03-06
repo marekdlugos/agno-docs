@@ -1,0 +1,6 @@
+| Parameter | Type | Default | Description |
+| --------- | ---- | ------- | ----------- |
+| `collection` | `str` | `None` | Name of the collection to store vectors and metadata in TopK |
+| `embedder` | `Optional[Embedder]` | `OpenAIEmbedder()` | Embedder instance to generate embeddings |
+| `distance` | `Distance` | `Distance.cosine` | Distance metric to use for similarity search |
+| `reranker` | `Optional[Reranker]` | `None` | Optional reranker instance to rerank search results |

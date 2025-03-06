@@ -1,0 +1,49 @@
+---
+title: TopK Integration
+---
+
+## Code
+
+```python cookbook/agent_concepts/vector_dbs/topk.py
+from agno.agent import Agent
+from agno.knowledge.pdf_url import PDFUrlKnowledgeBase
+
+# Initialize TopK
+from topk_sdk import Client
+
+# Create knowledge base
+knowledge_base = PDFUrlKnowledgeBase(
+    urls=["https://agno-public.s3.amazonaws.com/recipes/ThaiRecipes.pdf"],
+    vector_db=vector_db,
+)
+
+knowledge_base.load(recreate=False)  # Comment out after first run
+
+# Create and use the agent
+agent = Agent(knowledge=knowledge_base, show_tool_calls=True)
+agent.print_response("Show me how to make Tom Kha Gai", markdown=True)
+```
+
+## Usage
+
+<Steps>
+  <Snippet file="create-venv-step.mdx" />
+
+  <Step title="Install libraries">
+    ```bash
+    pip install -U topk-sdk pypdf openai agno
+    ```
+  </Step>
+
+  <Step title="Run Agent">
+    <CodeGroup>
+    ```bash Mac
+    python cookbook/agent_concepts/vector_dbs/topk.py
+    ```
+
+    ```bash Windows
+    python cookbook/agent_concepts/vector_dbs/topk.py
+    ```
+    </CodeGroup>
+  </Step>
+</Steps>

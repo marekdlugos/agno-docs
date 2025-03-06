@@ -1,0 +1,53 @@
+---
+title: TopK Agent Knowledge
+sidebarTitle: TopK
+---
+
+## Setup
+
+Install TopK SDK:
+```shell
+pip install topk-sdk
+```
+
+## Example
+
+```python agent_with_knowledge.py
+from agno.agent import Agent
+from agno.knowledge.pdf_url import PDFUrlKnowledgeBase
+from topk_sdk import Client
+
+from agno.embedder.mistral import MistralEmbedder
+from agno.models.mistral import MistralChat
+
+# Set up TopK
+# Get your TopK API key from console.topk.io
+client = Client(api_key="YOUR_TOPK_API_KEY", region="aws-us-east-1-elastica")
+
+knowledge_base = PDFUrlKnowledgeBase(
+    urls=["https://agno-public.s3.amazonaws.com/recipes/ThaiRecipes.pdf"],
+    vector_db=client.collection("recipes")
+)
+
+
+# knowledge_base.load(recreate=False)  # Comment out after first run
+
+agent = Agent(
+    model=MistralChat(provider="mistral-large-latest", api_key=os.getenv("MISTRAL_API_KEY")),
+    knowledge=knowledge_base,
+    show_tool_calls=True,
+)
+
+agent.print_response(
+    "What are the health benefits of Khao Niew Dam Piek Maphrao Awn?", markdown=True, show_full_reasoning=True
+)
+```
+
+## TopK Params
+
+<Snippet file="vectordb_topk_params.mdx" />
+
+## Developer Resources
+
+{/* TODO: Put together a cookbook */}
+{/* - View [Cookbook]() */}
